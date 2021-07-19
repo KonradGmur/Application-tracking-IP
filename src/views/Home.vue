@@ -2,7 +2,7 @@
 	<div class="flex flex-col h-screen max-h-screen">
 		<!--Search / Results-->
 		<div
-			class="flex justify-center realtive bg-hero-pattern bg-cover px-4 pt-8 pb-32"
+			class="flex justify-center relative bg-hero-pattern bg-cover px-4 pt-8 pb-32"
 		></div>
 		<!--Search Input-->
 		<div class="w-full max-w-screen-sm">
@@ -17,13 +17,16 @@
 					class="cursor-pointer bg-black text-white px-4 rounded-tr-md rounded-br-md flex items-center fas fa-chevron-right"
 				></i>
 			</div>
+			<!--IP Info-->
+			<IPInfo />
 		</div>
 	</div>
 </template>
 
 <script>
+import IPInfo from '../components/IPInfo.vue';
 export default {
 	name: 'Home',
-	components: {},
+	components: { IPInfo },
 };
 </script>
