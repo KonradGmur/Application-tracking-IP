@@ -15,11 +15,12 @@
 						placeholder="Search for any OP address or leave empty to get your ip info"
 					/>
 					<i
+						@click="getIpInfo"
 						class="cursor-pointer bg-black text-white px-4 rounded-tr-md rounded-br-md flex items-center fas fa-chevron-right"
 					></i>
 				</div>
 				<!--IP Info-->
-				<IPInfo v-if="ipInfo" />
+				<IPInfo v-if="ipInfo" :ipInfo="ipInfo" />
 			</div>
 		</div>
 		<!--Map-->
@@ -58,17 +59,26 @@ export default {
 				)
 				.addTo(mymap);
 		});
- 
+
 		const getIpInfo = async () => {
 			try {
 				const data = await axios.get(
 					`https://geo.ipify.org/api/v1?apiKey=at_wnhxCt4H20IeZv7H0StvYSa0lrmHe&ipAddress=${gueryIp.value}`
 				);
+				const result = data.data;
+				ipInfo.value = {
+					address: result.ip,
+					state: result.location.region,
+					timezone: result.location.timezone,
+					isp: result.isp,
+					lat: result.location.lat,
+					lng: result.location.lng,
+				};
 			} catch (err) {
 				alert(err.message);
 			}
 		};
-		return { queryIp, ipInfo };
+		return { queryIp, ipInfo, getIpInfo };
 	},
 };
 </script>
