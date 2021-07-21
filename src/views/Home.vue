@@ -20,7 +20,7 @@
 					></i>
 				</div>
 				<!--IP Info-->
-				<IPInfo v-if="ipInfo" :ipInfo="ipInfo" />
+				<IPInfo v-if="ipInfo" v-bind:ipInfo="ipInfo" />
 			</div>
 		</div>
 		<!--Map-->
@@ -41,7 +41,7 @@ export default {
 		const queryIp = ref('');
 		const ipInfo = ref(null);
 		onMounted(() => {
-			mymap = leaflet.map('mapid').setView([51.505, -0.09], 13);
+			mymap = leaflet.map('mapid').setView([52.2297, 21.0122], 13);
 
 			leaflet
 				.tileLayer(
@@ -63,9 +63,10 @@ export default {
 		const getIpInfo = async () => {
 			try {
 				const data = await axios.get(
-					`https://geo.ipify.org/api/v1?apiKey=at_wnhxCt4H20IeZv7H0StvYSa0lrmHe&ipAddress=${gueryIp.value}`
+					`https://geo.ipify.org/api/v1?apiKey=at_wnhxCt4H20IeZv7H0StvYSa0lrmHe&ipAddress=${queryIp.value}`
 				);
 				const result = data.data;
+				console.log(result);
 				ipInfo.value = {
 					address: result.ip,
 					state: result.location.region,
@@ -75,6 +76,7 @@ export default {
 					lng: result.location.lng,
 				};
 				leaflet.marker([ipInfo.value.lat, ipInfo.value.lng]).addTo(mymap);
+				mymap.setView([ipInfo.value.lat, ipInfo.value.lng], 13);
 			} catch (err) {
 				alert(err.message);
 			}
