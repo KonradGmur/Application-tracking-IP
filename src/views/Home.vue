@@ -9,6 +9,7 @@
 				<!--Search Input-->
 				<div class="flex">
 					<input
+						v-model="queryIp"
 						class="flex-1 py-3 px-2 rounded-tl-md rounded-bl-md focus:outline-none"
 						type="text"
 						placeholder="Search for any OP address or leave empty to get your ip info"
@@ -18,7 +19,7 @@
 					></i>
 				</div>
 				<!--IP Info-->
-				<IPInfo />
+				<IPInfo v-if="ipInfo" />
 			</div>
 		</div>
 		<!--Map-->
@@ -29,12 +30,15 @@
 <script>
 import IPInfo from '../components/IPInfo.vue';
 import leaflet from 'leaflet';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
 export default {
 	name: 'Home',
 	components: { IPInfo },
 	setup() {
 		let mymap;
+		const queryIp = ref('');
+		const ipInfo = ref(null);
 		onMounted(() => {
 			mymap = leaflet.map('mapid').setView([51.505, -0.09], 13);
 
@@ -54,6 +58,17 @@ export default {
 				)
 				.addTo(mymap);
 		});
+ 
+		const getIpInfo = async () => {
+			try {
+				const data = await axios.get(
+					`https://geo.ipify.org/api/v1?apiKey=at_wnhxCt4H20IeZv7H0StvYSa0lrmHe&ipAddress=${gueryIp.value}`
+				);
+			} catch (err) {
+				alert(err.message);
+			}
+		};
+		return { queryIp, ipInfo };
 	},
 };
 </script>
