@@ -1,11 +1,13 @@
 <template>
 	<div class="flex flex-col h-screen max-h-screen">
+
 		<!--Search / Results-->
 		<div
 			class="z-20 flex justify-center relative bg-hero-pattern bg-cover px-4 pt-8 pb-32"
 		>
 			<div class="w-full max-w-screen-sm">
 				<h1 class="text-white text-center text-3xl pb-4">IP Address Tracker</h1>
+
 				<!--Search Input-->
 				<div class="flex">
 					<input
@@ -19,10 +21,12 @@
 						class="cursor-pointer bg-black text-white px-4 rounded-tr-md rounded-br-md flex items-center fas fa-chevron-right"
 					></i>
 				</div>
+				
 				<!--IP Info-->
 				<IPInfo v-if="ipInfo" :ipInfo="ipInfo" />
 			</div>
 		</div>
+
 		<!--Map-->
 		<div id="mapid" class="h-full z-10"></div>
 	</div>
