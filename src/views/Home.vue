@@ -20,7 +20,7 @@
 					></i>
 				</div>
 				<!--IP Info-->
-				<IPInfo v-if="ipInfo" v-bind:ipInfo="ipInfo" />
+				<IPInfo v-if="ipInfo" :ipInfo="ipInfo" />
 			</div>
 		</div>
 		<!--Map-->
