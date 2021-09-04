@@ -9,6 +9,7 @@
 				<h1 class="text-white text-center text-3xl pb-4">IP Address Tracker</h1>
 
 				<!--Search Input-->
+
 				<div class="flex">
 					<input
 						v-model="queryIp"
@@ -23,6 +24,7 @@
 				</div>
 				
 				<!--IP Info-->
+				
 				<IPInfo v-if="ipInfo" :ipInfo="ipInfo" />
 			</div>
 		</div>
